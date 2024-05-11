@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Todo List</h1>
+        <form action="/todos" method="POST">
+            <input type="text" name="task" placeholder="Enter new task">
+            <button type="submit">Add Task</button>
+        </form>
+        <ul>
+            <% todos.forEach(todo => { %>
+                <li class="todo-item">
+                    <input class="checkbox" type="checkbox" <% if (todo.completed) { %> checked <% } %> onchange="this.form.submit()">
+                    <span class="<% if (todo.completed) { %>completed<% } %>"><%= todo.task %></span>
+                    <form action="/todos/<%= todo._id %>/delete" method="POST">
+                        <button class="delete-btn" type="submit">Delete</button>
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</body>
+</html>
